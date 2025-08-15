@@ -416,6 +416,8 @@ public class Calculator
             }
             operations[0].SetVars(operationVarsData.vars);
             string result = operations[0].Calculate().ToString();
+            if (result.Contains(",")) 
+                result = result.Replace(",", ".");
             input = ReplaceFormulaWithResult(input, result, operationVarsData.leftVarStartIndex, operationVarsData.rightVarEndIndex);
             MainLoop(input);
         }
@@ -457,7 +459,7 @@ public enum LogType
 
 public static class Debug
 {
-    static LogType showLogsFrom = LogType.Default | LogType.Error;
+    static LogType showLogsFrom = LogType.Error;
     public static void Log(string message, LogType type = LogType.Default)
     {
         string prefix = "";
